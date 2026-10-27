@@ -89,6 +89,141 @@ Pull requests trigger the `build.yml` workflow, which builds a preview and posts
 | `NETLIFY_AUTH_TOKEN` | Netlify authentication for PR previews |
 | `NETLIFY_SITE_ID` | Netlify site ID for PR previews |
 
+## Pages
+
+Folders with multiple .md files inside will have multiple chapters. If the .md file is on the /pages parent folder, it will be single chapter.
+
+## Markdown Formatting
+
+# Sample Figure
+
+{numref}`fig-sample` shows a sample bar chart generated with Matplotlib.
+
+```{figure} ../images/sample_figure.png
+:name: fig-sample
+:alt: A sample bar chart
+
+A sample bar chart showing values for five categories.
+```
+
+# Dropdown Example:
+
+:::{dropdown} 2025
+:open:
+
+- Item 1
+- Item 2
+- Item 3
+
+:::
+
+:::{dropdown} 2024
+
+- Item 1
+- Item 2
+- Item 3
+
+:::
+
+# Code Example:
+
+```{code-cell} ipython3
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 2 * np.pi, 100)
+y = np.sin(x)
+
+fig, ax = plt.subplots()
+ax.plot(x, y)
+ax.set_xlabel("x")
+ax.set_ylabel("sin(x)")
+ax.set_title("A Simple Plot")
+plt.show()
+```
+
+# Sample Table
+
+The table below shows an overview of the key tools used in this book.
+
+```{list-table} Overview of key tools
+:header-rows: 1
+:name: tab-tools
+
+* - Tool
+  - Description
+  - Version
+* - Python
+  - Programming language
+  - 3.12
+* - NumPy
+  - Numerical computing library
+  - 1.26
+* - Matplotlib
+  - Plotting and visualization
+  - 3.8
+* - MyST
+  - Markdown authoring framework
+  - 1.8
+```
+
+# Video Link Sample
+
+:::{iframe} https://www.youtube.com/embed/KiceHVININs
+:width: 100%
+Video tutorial: Build a Professional CV Website with Auto PDF Generation
+:::
+
+## Add Blog Posts
+
+The template includes a built-in blog. To add a new post:
+
+1. Create a new Markdown file in the `blog/` directory (e.g., `blog/my-first-post.md`).
+2. Add YAML frontmatter with `title`, `date`, `description`, and other metadata.
+3. Write your content in Markdown.
+4. Open `pages/blog.md` (or `blog.md`, depending on the template version) and add a new `:::{card}` entry inside the grid:
+
+```markdown
+:::{card} My First Blog Post
+:link: ./blog/my-first-post
+April 10, 2026 – A short description of the post.
+:::
+```
+
+The grid layout (`1 1 2 2`) means one column on small screens and two columns on larger screens, keeping the layout responsive.
+
+The template also generates RSS and Atom feeds automatically, so readers can subscribe to your blog. The feed links appear on the blog index page.
+
+## Deploy and Verify
+
+Once you are happy with your changes, commit and push:
+
+```bash
+git add .
+git commit -m "Update website content"
+git push
+```
+
+GitHub Actions will:
+
+1. Build the HTML site with `myst build –html`.
+2. Download fonts for the CV.
+3. Run `generate_cv.py` to produce the Typst source.
+4. Compile the PDF with Typst.
+5. Deploy everything to GitHub Pages.
+
+After a minute or two, visit your site and click the CV link. The PDF is served at a stable URL (`https://username.github.io/repo-name/cv.pdf`) that you can share with anyone. It includes bookmarks and a clickable table of contents for easy navigation, especially useful as your CV grows longer.
+
+## Using Pull Requests
+
+For larger changes, consider creating a feature branch and opening a pull request instead of pushing directly to `main`. The template includes a pre-commit configuration that catches typos, trailing whitespace, and formatting issues. This workflow also triggers a Netlify preview deployment so you can review your changes before merging.
+
+## Responsive Layout and Theming
+
+The site uses the MyST book theme, which supports both light and dark modes. The layout is responsive – grid components like `::::{grid} 2 2 4 4` show two columns on small screens and four on large screens. You can adjust these numbers on any grid to fit your content.
+
+For further visual customization, the template includes a `custom.css` file where you can override theme defaults without modifying the MyST source.
+
 ## License
 
 [MIT](LICENSE)

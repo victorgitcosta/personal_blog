@@ -27,16 +27,6 @@ project:
     - pages/references.bib
   toc: #table of contents
     - file: index.md
-    - title: Preface
-      children:
-        - file: pages/preface.md
-    - title: Getting Started
-      children:
-        - file: pages/part01/getting-started.md
-        - file: pages/part01/installation.md
-    - title: Examples
-      children:
-        - file: pages/part02/first-example.md
     - file: blog.md
       children:
         - file: tags/myst-markdown.md
@@ -51,6 +41,7 @@ site:
     favicon: fav.ico
     folders: true
     style: custom.css
+    #style can me commented to add personal styling
     # analytics_google: G-XXX
   actions:
     - title: RSS
